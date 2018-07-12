@@ -1,0 +1,6 @@
+name "tym"
+description "A simple vibe.d server application."
+copyright "Copyright © 2018, promega"
+authors "promega"
+dependency "vibe-d" version="~>0.7.23"
+versions "VibeDefaultMain"

@@ -1,0 +1,14 @@
+.dub
+docs.json
+__dummy.html
+*.o
+*.obj
+*source/implementation
+*jquery*
+*.sass-cache
+*minify
+*sasscompile
+*.map
+tym
+
+*auth.d

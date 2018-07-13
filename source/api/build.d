@@ -1,15 +1,18 @@
 module tym.build;
-import vibe.web.rest;
-import vibe.d;
 import data = tym.data;
-import impl = tym.implementation;
-import std.process;
+import db = tym.sql;
+import vibe.web.rest;
+import vibe.data.json;
 
 @path("/build")
 interface IBuildAPI {
 	@path("testconnection")
 	@method(HTTPMethod.GET)
-	string testconnection();
+	Json testconnection();
+
+	@path("all")
+	@method(HTTPMethod.GET) // Switch to post with security check when auth module implemented
+	string buildAll();
 }
 
 /**
@@ -21,35 +24,17 @@ class BuildAPI : IBuildAPI {
 	*	Tests the database connection settings.
 	* returns: {string} Response from the database.
 	*/
-	string testconnection(){
-		string connectionstring;
-		string command;
-		string sql;
-		string response;
+	Json testconnection(){
+		string sql = "SELECT 'Success' AS Test";
+		data.Column success = new data.Column("Test", new data.DbChar(7));
+		success.setValue("Success");
+		return db.executeJSON(sql, [ success ]);
+	}
 
-		impl.Settings s;
-		switch (s.dbFlavour) {
-			case data.DbFlavour.mysql:
-			case data.DbFlavour.mssqlserver:
-				// NotYetImplementedException
-				data.FlavourCheck();
-				break;
-			default: //postgres
-				command = "psql";
-				connectionstring ~= "postgres://";
-				connectionstring ~= s.username;
-				connectionstring ~= ":";
-				connectionstring ~= s.password;
-				connectionstring ~= "@" ~ s.host;
-				connectionstring ~= "/" ~ s.database;
-				sql ~= "-c \"SELECT 'Success' AS Test\"";
-				command ~= " " ~ connectionstring ~ " " ~ sql;
-				logInfo(command);
-				break;
-		}
-		auto result = to!string(executeShell(command).output);
-		logInfo("Running Test");
-		logInfo(result);
-		return result;
+	// Builds all of the BuildTargets from the implementation module on the database
+
+	string buildAll() {
+		// TODO: build the BuildTargets
+		return ""; // TODO: return helpful success/failure
 	}
 }

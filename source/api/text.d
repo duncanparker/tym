@@ -1,13 +1,13 @@
 module tym.textAPI;
 import std.algorithm.searching;
 import std.array;
-import tm = tym.textmodel;
-import enEN = tym.i8n.enEN;
-import deDE = tym.i8n.deDE;
-import vibe.web.rest;
 import tym.data;
-import vibe.d;
+import deDE = tym.i8n.deDE;
+import enEN = tym.i8n.enEN;
 import tym.motd;
+import tm = tym.textmodel;
+import vibe.web.rest;
+import vibe.d;
 
 @path("/api/i8n")
 interface ITextAPI {

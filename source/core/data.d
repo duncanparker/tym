@@ -2,21 +2,21 @@ module tym.data;
 import std.datetime;
 import std.regex;
 import std.conv;
+import tym.implementation;
 import vibe.d;
-import impl = tym.implementation;
 
 enum DbType {
   dbBool,
   dbBytes,
+  dbChar,
+  dbDateTime,
+  dbDecimal,
+  dbDouble,
+  dbFloat,
   dbInt16,
   dbInt32,
   dbInt64,
-  dbFloat,
-  dbDouble,
-  dbDecimal,
-  dbMoney,
-  dbChar,
-  dbDateTime
+  dbMoney
 }
 
 public enum DbFlavour {
@@ -25,13 +25,13 @@ public enum DbFlavour {
   mssqlserver = 3 // Not yet supported
 }
 
-interface ITable {
+public interface ITable {
   string Schema();
   string Name();
   IColumn[] Columns();
 }
 
-interface IColumn {
+public interface IColumn {
   string Name();
   void Name(string name);
   IType Type();
@@ -70,7 +70,7 @@ class DbTypeException : Exception {
 }
 
 public bool FlavourCheck(){
-  impl.Settings s;
+  Settings s;
   switch(s.dbFlavour) {
     case DbFlavour.mysql:
       throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
@@ -366,13 +366,13 @@ class Column : IColumn {
     if(Type.type != DbType.dbChar) {
       throw new DbTypeException("Cannot cast type to string");
     }
-    _value = "'" ~ value ~ "''";
+    _value = "'" ~ value ~ "'";
   }
   void setValue(DateTime value) {
     if(Type.type != DbType.dbDateTime) {
       throw new DbTypeException("Cannot cast type to datetime");
     }
-    _value = "'" ~ to!string(value) ~ "''";
+    _value = "'" ~ to!string(value) ~ "'";
   }
   public string getValue() {
     return _value;

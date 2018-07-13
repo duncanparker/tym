@@ -9,7 +9,6 @@ _This is currently under development - stashing code as I go._
 
 ## TODO
 
-- Select and apply a licence 😂
 - List build requirements in this README
 - Allow/handle implicit casts from char to other types, from int to float, etc...
 - Hook up postgres

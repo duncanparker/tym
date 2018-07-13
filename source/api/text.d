@@ -7,6 +7,7 @@ import deDE = tym.i8n.deDE;
 import vibe.web.rest;
 import tym.data;
 import vibe.d;
+import tym.motd;
 
 @path("/api/i8n")
 interface ITextAPI {
@@ -36,11 +37,4 @@ class TextAPI : ITextAPI {
 		motd.text.setValue("This is a MOTD!");
 		return motd.text.getValue();
 	}
-}
-class MOTD : ITable {
-	string Schema() { return "dbo"; }
-	string Name() { return "motd"; }
-	Column ID = new Column("ID", new DbInt16(true));
-	Column text = new Column("ID", new DbChar(100));
-	IColumn[] Columns() { return [ ID, text ]; }
 }

@@ -1,6 +1,7 @@
 import vibe.d;
-
 import text = tym.textAPI;
+import build = tym.build;
+import impl = tym.implementation;
 
 shared static this()
 {
@@ -10,8 +11,11 @@ shared static this()
 
 	auto router = new URLRouter;
 	router.registerRestInterface(new text.TextAPI);
+	router.registerRestInterface(new build.BuildAPI);
 	router.get("*", serveStaticFiles("public/"));
 
+	// start implmenetation;
+	impl.go();
 
 	listenHTTP(settings, router);
 

@@ -3,6 +3,7 @@ import std.datetime;
 import std.regex;
 import std.conv;
 import vibe.d;
+import impl = tym.implementation;
 
 enum DbType {
   dbBool,
@@ -18,7 +19,7 @@ enum DbType {
   dbDateTime
 }
 
-enum DbFlavour {
+public enum DbFlavour {
   postgres = 1,
   mysql = 2, // Not yet supported
   mssqlserver = 3 // Not yet supported
@@ -68,16 +69,29 @@ class DbTypeException : Exception {
   }
 }
 
+public bool FlavourCheck(){
+  impl.Settings s;
+  switch(s.dbFlavour) {
+    case DbFlavour.mysql:
+      throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
+    case DbFlavour.mssqlserver:
+      throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+    case DbFlavour.postgres:
+    default:
+      return true;
+  }
+}
+
 class DbBool : IType {
   DbType type() { return DbType.dbBool; }
   string name(DbFlavour dbType) {
     switch(dbType) {
-      case DbFlavour.postgres:
-        return "bool";
       case DbFlavour.mysql:
-        throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
       case DbFlavour.mssqlserver:
-        throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+        // NotYetImplementedException
+        FlavourCheck();
+        return "";
+      case DbFlavour.postgres:
       default:
         return "bool";
     }
@@ -87,12 +101,12 @@ class DbBytes : IType {
   DbType type() { return DbType.dbBytes; }
   string name(DbFlavour dbType) {
     switch(dbType) {
-      case DbFlavour.postgres:
-        return "bytea";
       case DbFlavour.mysql:
-        throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
       case DbFlavour.mssqlserver:
-        throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+        // NotYetImplementedException
+        FlavourCheck();
+        return "";
+      case DbFlavour.postgres:
       default:
         return "bytea";
     }
@@ -108,15 +122,14 @@ class DbInt16 : IType {
 
   string name(DbFlavour dbType) {
     switch(dbType) {
-      case DbFlavour.postgres:
-        if (IsIdentity) return "smallserial";
-        return "smallint";
       case DbFlavour.mysql:
-        throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
       case DbFlavour.mssqlserver:
-        throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+        // NotYetImplementedException
+        FlavourCheck();
+        return "";
+      case DbFlavour.postgres:
       default:
-        return "bool";
+        return "smallint";
     }
   }
 }
@@ -130,13 +143,12 @@ class DbInt32 : IType {
 
   string name(DbFlavour dbType) {
     switch(dbType) {
-      case DbFlavour.postgres:
-        if(IsIdentity) return "serial";
-        return "integer";
       case DbFlavour.mysql:
-        throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
       case DbFlavour.mssqlserver:
-        throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+        // NotYetImplementedException
+        FlavourCheck();
+        return "";
+      case DbFlavour.postgres:
       default:
         return "integer";
     }
@@ -152,13 +164,12 @@ class DbInt64 : IType {
 
   string name(DbFlavour dbType) {
     switch(dbType) {
-      case DbFlavour.postgres:
-        if(IsIdentity) return "bigint";
-        return "bigint";
       case DbFlavour.mysql:
-        throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
       case DbFlavour.mssqlserver:
-        throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+        // NotYetImplementedException
+        FlavourCheck();
+        return "";
+      case DbFlavour.postgres:
       default:
         return "bigint";
     }
@@ -168,12 +179,12 @@ class DbFloat : IType {
   DbType type() { return DbType.dbFloat; }
   string name(DbFlavour dbType) {
     switch(dbType) {
-      case DbFlavour.postgres:
-        return "real";
       case DbFlavour.mysql:
-        throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
       case DbFlavour.mssqlserver:
-        throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+        // NotYetImplementedException
+        FlavourCheck();
+        return "";
+      case DbFlavour.postgres:
       default:
         return "real";
     }
@@ -183,12 +194,12 @@ class DbDouble : IType {
   DbType type() { return DbType.dbDouble; }
   string name(DbFlavour dbType) {
     switch(dbType) {
-      case DbFlavour.postgres:
-        return "double precision";
       case DbFlavour.mysql:
-        throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
       case DbFlavour.mssqlserver:
-        throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+        // NotYetImplementedException
+        FlavourCheck();
+        return "";
+      case DbFlavour.postgres:
       default:
         return "double precision";
     }
@@ -200,12 +211,12 @@ class DbDecimal : IType {
   short precision = 12; // Override this as applicable
   string name(DbFlavour dbType) {
     switch(dbType) {
-      case DbFlavour.postgres:
-        return "numeric(" ~ to!string(length) ~ ',' ~ to!string(precision) ~ ')';
       case DbFlavour.mysql:
-        throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
       case DbFlavour.mssqlserver:
-        throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+        // NotYetImplementedException
+        FlavourCheck();
+        return "";
+      case DbFlavour.postgres:
       default:
         return "numeric(" ~ to!string(length) ~ ',' ~ to!string(precision) ~ ')';
     }
@@ -215,12 +226,12 @@ class DbMoney : IType {
   DbType type() { return DbType.dbMoney; }
   string name(DbFlavour dbType) {
     switch(dbType) {
-      case DbFlavour.postgres:
-        return "money";
       case DbFlavour.mysql:
-        throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
       case DbFlavour.mssqlserver:
-        throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+        // NotYetImplementedException
+        FlavourCheck();
+        return "";
+      case DbFlavour.postgres:
       default:
         return "money";
     }
@@ -236,12 +247,12 @@ class DbChar : IType {
 
   string name(DbFlavour dbType) {
     switch(dbType) {
-      case DbFlavour.postgres:
-        return (_length == -1 ? "text" : "varchar(" ~ to!string(_length) ~ ")");
       case DbFlavour.mysql:
-        throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
       case DbFlavour.mssqlserver:
-        throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+        // NotYetImplementedException
+        FlavourCheck();
+        return "";
+      case DbFlavour.postgres:
       default:
         return (_length == -1 ? "text" : "varchar(" ~ to!string(_length) ~ ")");
     }
@@ -251,12 +262,12 @@ class DbDateTime : IType {
   DbType type() { return DbType.dbDateTime; }
   string name(DbFlavour dbType) {
     switch(dbType) {
-      case DbFlavour.postgres:
-        return "timestamp";
       case DbFlavour.mysql:
-        throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
       case DbFlavour.mssqlserver:
-        throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+        // NotYetImplementedException
+        FlavourCheck();
+        return "";
+      case DbFlavour.postgres:
       default:
         return "timestamp";
     }

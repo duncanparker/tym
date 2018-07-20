@@ -5,6 +5,9 @@ import tym.implementation;
 import vibe.d;
 import vibe.data.json;
 
+/**
+*	Handles the initial command based on the DbFlavour
+*/
 string command(){
 	string command;
 	Settings s;
@@ -20,6 +23,9 @@ string command(){
 	return command;
 }
 
+/**
+*	Generates the connection string parameters based on the DbFlavour
+*/
 string connectionString() {
 	string connectionString;
 	Settings s;
@@ -40,6 +46,9 @@ string connectionString() {
 	return connectionString;
 }
 
+/**
+*	Executes SQL parameterising arguments returning it in JSON format
+*/
 Json executeJSON(string sql, data.IColumn[] args = null) {
 	string commandString;
 	Settings s;

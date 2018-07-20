@@ -9,18 +9,27 @@ import tm = tym.textmodel;
 import vibe.web.rest;
 import vibe.d;
 
+/**
+*	Handles translation of text.
+*/
 @path("/api/i8n")
 interface ITextAPI {
+	/**
+	*	Gets the language specific dictionary for rendering.
+	*/
 	@headerParam("lang","Accept-Language")
 	@path("lib")
 	tm.Text getText(string lang);
 
+	/**
+	*	Deprecated: This was just for testing.
+	*/
 	@path("motd")
 	string getMOTD();
 }
 
 class TextAPI : ITextAPI {
-   tm.Text getText(string lang){
+	tm.Text getText(string lang){
 		string[] langs = split(lang,",");
 		for(int i; i < langs.length; i++){
 			if(canFind(langs[i], "de")){

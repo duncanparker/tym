@@ -33,6 +33,7 @@ if the above is successful hit http://127.0.0.1/build/testconnection if the resp
 - List build full set of requirements in this README
 - Improve installation intructions
 - Allow/handle implicit casts from char to other types, from int to float, etc...
+- Change postgres to use libpq, derelict, or odbc instead of psql
 - Create parameterized query factory to build queries based on the objects fed into it (including creation/altering of tables, indexes0)
-- Create an authentication method and tokeniser and limit access to sensitive functionality based on cookies. 
+- Create an authentication method and tokeniser and limit access to sensitive functionality based on cookies.
 - Add documentation to classes, methods and properties.

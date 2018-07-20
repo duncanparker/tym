@@ -1,6 +1,9 @@
 module tym.motd;
 import tym.data;
 
+/**
+* Deprecated: This was just for testing.
+*/
 class MOTD : ITable {
 	string Schema() { return "dbo"; }
 	string Name() { return "motd"; }

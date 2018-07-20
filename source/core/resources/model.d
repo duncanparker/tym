@@ -1,5 +1,9 @@
 module tym.textmodel;
 
+/**
+* Default dictionary of translatable terms.
+* remarks:	You may derive more languages by inheriting from this struct.
+*/
 struct Text {
 	string title = "Tym";
 	string catchphrase = "Tym is of the essence.";

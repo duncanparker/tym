@@ -8,6 +8,6 @@ __dummy.html
 *minify
 *sasscompile
 *.map
-tym
+tym$
 
 *auth.d

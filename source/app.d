@@ -1,6 +1,6 @@
 import vibe.d;
-import text = tym.textAPI;
-import build = tym.build;
+import tym.api.text;
+import tym.api.build;
 import impl = tym.implementation;
 
 shared static this()
@@ -10,8 +10,8 @@ shared static this()
 	settings.bindAddresses = ["::1", "127.0.0.1"];
 
 	auto router = new URLRouter;
-	router.registerRestInterface(new text.TextAPI);
-	router.registerRestInterface(new build.BuildAPI);
+	router.registerRestInterface(new TextAPI);
+	router.registerRestInterface(new BuildAPI);
 	router.get("*", serveStaticFiles("public/"));
 
 	// start implmenetation;

@@ -1,6 +1,7 @@
 import vibe.d;
 import tym.api.text;
 import tym.api.build;
+import tym.settings;
 import impl = tym.implementation;
 
 shared static this()
@@ -12,6 +13,13 @@ shared static this()
 	auto router = new URLRouter;
 	router.registerRestInterface(new TextAPI);
 	router.registerRestInterface(new BuildAPI);
+
+	Settings s;
+	foreach (path; s.staticPaths) {
+		auto fsettings = new HTTPFileServerSettings;
+		fsettings.serverPathPrefix = "/" ~ path;
+		router.get("*", serveStaticFiles(path ~ "/", fsettings));
+	}
 	router.get("*", serveStaticFiles("public/"));
 
 	// start implmenetation;

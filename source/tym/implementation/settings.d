@@ -12,4 +12,7 @@ public final struct Settings {
 	string database = "tym";
 	string username = "tymadmin";
 	string password = "tymadmin";
+
+	/* Create static paths for serving up static files here */
+	string[] staticPaths = [ "example1"	];
 }

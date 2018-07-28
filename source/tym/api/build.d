@@ -29,7 +29,7 @@ interface IBuildAPI {
 
 class BuildAPI : IBuildAPI {
 	Json testconnection(){
-		string sql = "SELECT 'Success' AS Test";
+		string sql = "SELECT $1 AS Test";
 		data.Column success = new data.Column("Test", new data.DbChar(7));
 		success.setValue("Success");
 		return db.executeJSON(sql, [ success ]);

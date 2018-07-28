@@ -4,7 +4,6 @@ import std.datetime;
 import std.regex;
 import std.conv;
 import tym.settings;
-//import vibe.d;
 
 enum DbType {
 	dbBool,
@@ -74,12 +73,12 @@ public bool FlavourCheck(){
 	Settings s;
 	switch(s.dbFlavour) {
 		case DbFlavour.mysql:
-		throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
+			throw new NotYetImplementedException("MySQL is not supported yet. Please use postgresql");
 		case DbFlavour.mssqlserver:
-		throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
+			throw new NotYetImplementedException("Microsoft SQL Server is not supported yet. Please use postgresql");
 		case DbFlavour.postgres:
 		default:
-		return true;
+			return true;
 	}
 }
 
@@ -89,12 +88,12 @@ class DbBool : IType {
 		switch(dbType) {
 			case DbFlavour.mysql:
 			case DbFlavour.mssqlserver:
-			// NotYetImplementedException
-			FlavourCheck();
-			return "";
+				// NotYetImplementedException
+				FlavourCheck();
+				return "";
 			case DbFlavour.postgres:
 			default:
-			return "bool";
+				return "bool";
 		}
 	}
 }
@@ -104,12 +103,12 @@ class DbBytes : IType {
 		switch(dbType) {
 			case DbFlavour.mysql:
 			case DbFlavour.mssqlserver:
-			// NotYetImplementedException
-			FlavourCheck();
-			return "";
+				// NotYetImplementedException
+				FlavourCheck();
+				return "";
 			case DbFlavour.postgres:
 			default:
-			return "bytea";
+				return "bytea";
 		}
 	}
 }
@@ -125,12 +124,12 @@ class DbInt16 : IType {
 		switch(dbType) {
 			case DbFlavour.mysql:
 			case DbFlavour.mssqlserver:
-			// NotYetImplementedException
-			FlavourCheck();
-			return "";
+				// NotYetImplementedException
+				FlavourCheck();
+				return "";
 			case DbFlavour.postgres:
 			default:
-			return "smallint";
+				return "smallint";
 		}
 	}
 }
@@ -146,12 +145,12 @@ class DbInt32 : IType {
 		switch(dbType) {
 			case DbFlavour.mysql:
 			case DbFlavour.mssqlserver:
-			// NotYetImplementedException
-			FlavourCheck();
-			return "";
+				// NotYetImplementedException
+				FlavourCheck();
+				return "";
 			case DbFlavour.postgres:
 			default:
-			return "integer";
+				return "integer";
 		}
 	}
 }
@@ -167,12 +166,12 @@ class DbInt64 : IType {
 		switch(dbType) {
 			case DbFlavour.mysql:
 			case DbFlavour.mssqlserver:
-			// NotYetImplementedException
-			FlavourCheck();
-			return "";
+				// NotYetImplementedException
+				FlavourCheck();
+				return "";
 			case DbFlavour.postgres:
 			default:
-			return "bigint";
+				return "bigint";
 		}
 	}
 }
@@ -182,12 +181,12 @@ class DbFloat : IType {
 		switch(dbType) {
 			case DbFlavour.mysql:
 			case DbFlavour.mssqlserver:
-			// NotYetImplementedException
-			FlavourCheck();
-			return "";
+				// NotYetImplementedException
+				FlavourCheck();
+				return "";
 			case DbFlavour.postgres:
 			default:
-			return "real";
+				return "real";
 		}
 	}
 }
@@ -197,12 +196,12 @@ class DbDouble : IType {
 		switch(dbType) {
 			case DbFlavour.mysql:
 			case DbFlavour.mssqlserver:
-			// NotYetImplementedException
-			FlavourCheck();
-			return "";
+				// NotYetImplementedException
+				FlavourCheck();
+				return "";
 			case DbFlavour.postgres:
 			default:
-			return "double precision";
+				return "double precision";
 		}
 	}
 }
@@ -214,12 +213,12 @@ class DbDecimal : IType {
 		switch(dbType) {
 			case DbFlavour.mysql:
 			case DbFlavour.mssqlserver:
-			// NotYetImplementedException
-			FlavourCheck();
-			return "";
+				// NotYetImplementedException
+				FlavourCheck();
+				return "";
 			case DbFlavour.postgres:
 			default:
-			return "numeric(" ~ to!string(length) ~ ',' ~ to!string(precision) ~ ')';
+				return "numeric(" ~ to!string(length) ~ ',' ~ to!string(precision) ~ ')';
 		}
 	}
 }
@@ -229,12 +228,12 @@ class DbMoney : IType {
 		switch(dbType) {
 			case DbFlavour.mysql:
 			case DbFlavour.mssqlserver:
-			// NotYetImplementedException
-			FlavourCheck();
-			return "";
+				// NotYetImplementedException
+				FlavourCheck();
+				return "";
 			case DbFlavour.postgres:
 			default:
-			return "money";
+				return "money";
 		}
 	}
 }
@@ -250,12 +249,12 @@ class DbChar : IType {
 		switch(dbType) {
 			case DbFlavour.mysql:
 			case DbFlavour.mssqlserver:
-			// NotYetImplementedException
-			FlavourCheck();
-			return "";
+				// NotYetImplementedException
+				FlavourCheck();
+				return "";
 			case DbFlavour.postgres:
 			default:
-			return (_length == -1 ? "text" : "varchar(" ~ to!string(_length) ~ ")");
+				return (_length == -1 ? "text" : "varchar(" ~ to!string(_length) ~ ")");
 		}
 	}
 }
@@ -265,12 +264,12 @@ class DbDateTime : IType {
 		switch(dbType) {
 			case DbFlavour.mysql:
 			case DbFlavour.mssqlserver:
-			// NotYetImplementedException
-			FlavourCheck();
-			return "";
+				// NotYetImplementedException
+				FlavourCheck();
+				return "";
 			case DbFlavour.postgres:
 			default:
-			return "timestamp";
+				return "timestamp";
 		}
 	}
 }
